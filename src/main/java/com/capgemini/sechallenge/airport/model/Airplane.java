@@ -15,5 +15,5 @@ public class Airplane {
 
     //onetomany
     private Airport airport;
-    
+
 }
