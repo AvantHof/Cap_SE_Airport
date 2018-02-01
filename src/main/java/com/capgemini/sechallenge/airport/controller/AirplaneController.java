@@ -3,10 +3,7 @@ package com.capgemini.sechallenge.airport.controller;
 import com.capgemini.sechallenge.airport.model.Airplane;
 import com.capgemini.sechallenge.airport.repository.AirplaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/airplane/")
@@ -24,12 +21,21 @@ public class AirplaneController {
     public Airplane createAirplane(@RequestBody Airplane airplane){
         //validation
         this.airplaneRepository.save(airplane);
-        System.out.println(airplane.getName() + " has been added to the database.");
+
         return airplane;
     }
 
-    //update
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public Airplane updateAirplane(@RequestBody Airplane airplane){
+        //validation
+        this.airplaneRepository.save(airplane);
+        return airplane;
+    }
 
-    //delete
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+    public void deleteAirplane(@PathVariable long id) {
+        this.airplaneRepository.delete(id);
+    }
+
 
 }
