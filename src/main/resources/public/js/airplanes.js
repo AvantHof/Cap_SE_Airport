@@ -7,7 +7,8 @@ $(document).ready(function() {
         rowId: 'id',
         columns: [
             { "data": "name" },
-            { "data": "gas" }
+            { "data": "gas" },
+            { "data": "airport"}
         ]
     });
 
@@ -129,13 +130,15 @@ function removeAirplane(airplane, successCallback, errorCallback){
 function getFormData() {
     return {
         name : $("#name").val(),
-        gas : $("#gas").val()
+        gas : $("#gas").val(),
+        airport : $("#airport").val()
     };
 }
 
 function setFormData(airplane) {
     $('#name').val(airplane.name);
     $('#gas').val(airplane.gas);
+    $('#airport').val(airplane.airport);
 }
 
 function updateTable() {

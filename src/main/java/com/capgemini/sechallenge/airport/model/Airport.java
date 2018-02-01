@@ -1,9 +1,6 @@
 package com.capgemini.sechallenge.airport.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -15,9 +12,8 @@ public class Airport {
 
     private String location;
 
-    //manytoone
-//    private List<Airplane> planes;
-
+    @OneToMany(mappedBy="airport", cascade= CascadeType.ALL)
+    private List<Airplane> planes;
 
     public long getId() {
         return id;
@@ -33,5 +29,13 @@ public class Airport {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public List<Airplane> getPlanes() {
+        return planes;
+    }
+
+    public void setPlanes(List<Airplane> planes) {
+        this.planes = planes;
     }
 }
