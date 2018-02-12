@@ -2,13 +2,19 @@ var selectedId;
 var edit = false;
 
 $(document).ready(function() {
+    getAirports(function(result) {
+        result.forEach(function(airport){
+            $('#airport').append('<option value=' + airport.id + '>' + airport.location + '</option>');
+        });
+    });
+
     $('#airplaneTable').DataTable({
         bLengthChange: false,
         rowId: 'id',
         columns: [
             { "data": "name" },
             { "data": "gas" },
-            { "data": "airport"}
+            { "data": "airport.location"}
         ]
     });
 
@@ -80,6 +86,10 @@ function handleEditFormSubmit() {
     }, handleError);
 }
 
+function handleFlyFormSubmit(){
+    
+}
+
 function handleError(error) {
     toastr.error(JSON.parse(error.responseText).message);
     console.log(error);
@@ -127,18 +137,28 @@ function removeAirplane(airplane, successCallback, errorCallback){
     });
 }
 
+function getAirports(successCallback){
+    $.ajax({
+        url:"/api/airport/",
+        type:"GET",
+        success: successCallback
+    });
+}
+
 function getFormData() {
     return {
         name : $("#name").val(),
         gas : $("#gas").val(),
-        airport : $("#airport").val()
+        airport : {
+            id : $("#airport").val()
+        }
     };
 }
 
 function setFormData(airplane) {
     $('#name').val(airplane.name);
     $('#gas').val(airplane.gas);
-    $('#airport').val(airplane.airport);
+    $('#airport option:eq(' + airplane.airport + ')').prop('selected', true);
 }
 
 function updateTable() {
