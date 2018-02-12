@@ -73,6 +73,9 @@
         <button type="button" class="btn btn-danger controls" id="remove" disabled>
             <i class="fa fa-trash" aria-hidden="true"></i>
         </button>
+        <button type="button" class="btn btn-info controls" id="fly" disabled>
+            <i class="fa fa-plane" aria-hidden="true"></i>
+        </button>
     </div>
     <div class="row">
         <div class="col">
@@ -108,8 +111,10 @@
                         <input id="gas" class="form-control" name="gas" type="text" required>
                     </div>
                     <div class="form-group">
-                        <label for="airportId">Gas</label>
-                        <input id="airportId" class="form-control" name="airportId" type="text" required>
+                        <label for="airport">Airport</label>
+                        <select class="form-control" id="airport" name="airport" required>
+                        </select>
+                        <!--<input id="airport" class="form-control" name="airport" type="text" required>-->
                     </div>
                     <input type="submit" id="airplaneSubmit" style="display: none;">
                 </form>

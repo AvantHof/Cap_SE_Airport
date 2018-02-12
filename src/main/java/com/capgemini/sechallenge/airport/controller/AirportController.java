@@ -1,5 +1,6 @@
 package com.capgemini.sechallenge.airport.controller;
 
+import com.capgemini.sechallenge.airport.model.Airplane;
 import com.capgemini.sechallenge.airport.model.Airport;
 import com.capgemini.sechallenge.airport.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,21 @@ public class AirportController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Airport> getAllAirports(){
-        return this.airportRepository.findAll();
+        Iterable<Airport> airports = this.airportRepository.findAll();
+
+        Iterable<Airport> tempAirports = airports;
+        for(Airport airport : tempAirports){
+            if(airport.getPlanes()!=null){
+                for(Airplane plane : airport.getPlanes()){
+
+                    plane.setAirport(null);
+                }
+
+            }
+        }
+
+
+        return tempAirports;
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)

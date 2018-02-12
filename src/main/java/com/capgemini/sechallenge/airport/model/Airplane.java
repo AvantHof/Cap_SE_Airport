@@ -1,9 +1,11 @@
 package com.capgemini.sechallenge.airport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Airplane {
@@ -12,11 +14,14 @@ public class Airplane {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotNull
     private String name;
+
+    @NotNull
     private int gas;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="airport_id")
+    @ManyToOne
+    @JoinColumn(name="airport")
     private Airport airport;
 
     public long getId() {
